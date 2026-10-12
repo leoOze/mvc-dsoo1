@@ -21,8 +21,7 @@ class ErroDeRegra {
 package "modelo" {
 class Paciente {
 - __responsavel
-+ responsavel() {property, get}
-+ responsavel(responsavel: Pessoa | None) {property, set}
++ {field} responsavel: Pessoa | None {property, get, set}
 --
 + __init__(nome: str, celular: str, cpf: str, data_nascimento: date)
 + definir_responsavel(responsavel: Pessoa)
@@ -34,14 +33,10 @@ abstract class Pessoa {
 - __cpf
 - __data_nascimento
 - __nome
-+ nome() {property, get}
-+ nome(nome: str) {property, set}
-+ celular() {property, get}
-+ celular(celular: str) {property, set}
-+ cpf() {property, get}
-+ cpf(cpf: str) {property, set}
-+ data_nascimento() {property, get}
-+ data_nascimento(data_nascimento: date) {property, set}
++ {field} nome: str {property, get, set}
++ {field} celular: str {property, get, set}
++ {field} cpf: str {property, get, set}
++ {field} data_nascimento: date {property, get, set}
 --
 + __init__(nome: str, celular: str, cpf: str, data_nascimento: date)
 + idade_em(data: date): int
@@ -51,10 +46,8 @@ abstract class Pessoa {
 class Profissional {
 - __especialidade
 - __registro
-+ especialidade() {property, get}
-+ especialidade(especialidade: str) {property, set}
-+ registro() {property, get}
-+ registro(registro: str) {property, set}
++ {field} especialidade: str {property, get, set}
++ {field} registro: str {property, get, set}
 --
 + __init__(nome: str, celular: str, cpf: str, data_nascimento: date, especialidade: str, registro: str)
 + descricao()
@@ -66,5 +59,8 @@ Exception <|-- ErroDeRegra
 Pessoa <|-- Paciente
 ABC <|-- Pessoa
 Pessoa <|-- Profissional
-Paciente --> Pessoa : responsavel
+Paciente --> "0..1" Pessoa : responsavel
+Paciente ..> ErroDeRegra : cria
+Pessoa ..> ErroDeRegra : cria
+Profissional ..> ErroDeRegra : cria
 @enduml
