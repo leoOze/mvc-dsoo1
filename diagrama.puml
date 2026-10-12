@@ -1,0 +1,70 @@
+@startuml
+!pragma layout smetana
+left to right direction
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam roundcorner 0
+skinparam classBackgroundColor #F2F8FC
+skinparam classBorderColor #21435D
+skinparam ArrowColor #3B556B
+skinparam packageBackgroundColor #F8FAFC
+skinparam nodesep 45
+skinparam ranksep 65
+hide circle
+package "utilidades" {
+class ErroDeRegra {
+--
+}
+}
+package "modelo" {
+class Paciente {
+- __responsavel
++ responsavel() {property, get}
++ responsavel(responsavel: Pessoa | None) {property, set}
+--
++ __init__(nome: str, celular: str, cpf: str, data_nascimento: date)
++ definir_responsavel(responsavel: Pessoa)
++ pode_atender_sozinho(data: date): bool
++ descricao()
+}
+abstract class Pessoa {
+- __celular
+- __cpf
+- __data_nascimento
+- __nome
++ nome() {property, get}
++ nome(nome: str) {property, set}
++ celular() {property, get}
++ celular(celular: str) {property, set}
++ cpf() {property, get}
++ cpf(cpf: str) {property, set}
++ data_nascimento() {property, get}
++ data_nascimento(data_nascimento: date) {property, set}
+--
++ __init__(nome: str, celular: str, cpf: str, data_nascimento: date)
++ idade_em(data: date): int
+{abstract} + descricao(): str
++ __str__()
+}
+class Profissional {
+- __especialidade
+- __registro
++ especialidade() {property, get}
++ especialidade(especialidade: str) {property, set}
++ registro() {property, get}
++ registro(registro: str) {property, set}
+--
++ __init__(nome: str, celular: str, cpf: str, data_nascimento: date, especialidade: str, registro: str)
++ descricao()
+}
+}
+abstract class ABC <<externo>>
+class Exception <<externo>>
+Exception <|-- ErroDeRegra
+Pessoa <|-- Paciente
+ABC <|-- Pessoa
+Pessoa <|-- Profissional
+Paciente --> Pessoa : responsavel
+@enduml

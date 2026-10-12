@@ -1,0 +1,19 @@
+# Contexto local
+/CONTEXTO.md
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# macOS
+.DS_Store
+
+# Ferramentas locais de geração de diagramas
+.tools/
+
+# Notas locais dos diagramas
+[Nn][Oo][Tt][Aa].txt
+[Nn][Oo][Tt][Aa][Ss].txt
